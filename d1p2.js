@@ -14,14 +14,21 @@ var calVal = 0;
 (async () => {
   await WordsNinja.loadDictionary(); // First load dictionary
   for (const line of lines) {
-    spaced_line = WordsNinja.splitSentence(line, {joinWords: true});
-    numberizedLine = wordsToNumbers(spaced_line)
+    spacedLine = WordsNinja.splitSentence(line, {joinWords: true});
+    // for (const num of arrayLine) {
+    //   num
+    // }
+    numberizedLine = wordsToNumbers(spacedLine)
     digits = numberizedLine.match(/\d+/g);
     first_digit = Number(digits[0][0]);
     last_digit = digits[digits.length - 1];
     last_digit = Number(last_digit[last_digit.length - 1]);
     //TODO add debug if value is >99
     calVal = first_digit * 10 + last_digit
+    if (calVal >  99) {
+      console.log("issue with line: " + line)
+      console.log("calVal: " + calVal)
+    }
     sum += calVal;
   }
   console.log("sum of calibration values: " + sum);
